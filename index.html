@@ -1,45 +1,1033 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfólio da Maria - Tema Homem-Aranha</title>
-  <!-- Link para o CSS externo -->
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colégio Polo - Página Principal</title>
+    <style>
+        :root {
+            --azul-escuro: #0a1f3f;
+            --azul-medio: #0d2f5e;
+            --azul-principal: #0f3b7a;
+            --azul-claro: #1a5bb5;
+            --azul-destaque: #2980b9;
+            --azul-suave: #e8f0fb;
+            --azul-marca: #0b2d56;
+            --dourado: #c9a84c;
+            --branco: #ffffff;
+            --cinza-claro: #f5f7fa;
+            --texto-escuro: #1a1a2e;
+            --texto-medio: #3a3a4e;
+            --sombra: 0 4px 20px rgba(0, 0, 0, 0.12);
+            --sombra-forte: 0 8px 40px rgba(0, 0, 0, 0.18);
+            --transicao: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--cinza-claro);
+            color: var(--texto-escuro);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Marca d'água */
+        .marca-dagua-fundo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.025;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .marca-dagua-fundo .logo-watermark {
+            font-size: clamp(18rem, 35vw, 38rem);
+            font-weight: 900;
+            color: var(--azul-principal);
+            letter-spacing: -0.04em;
+            user-select: none;
+            white-space: nowrap;
+            transform: rotate(-8deg);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            text-transform: uppercase;
+        }
+
+        /* Header */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--azul-escuro);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 3px solid var(--dourado);
+            box-shadow: 0 2px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0.6rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-icone {
+            width: 50px;
+            height: 50px;
+            background: var(--dourado);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--azul-escuro);
+            letter-spacing: -1px;
+            flex-shrink: 0;
+            box-shadow: 0 0 25px rgba(201, 168, 76, 0.5);
+        }
+
+        .logo-texto {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-nome {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--branco);
+            letter-spacing: 0.5px;
+            line-height: 1.1;
+        }
+
+        .logo-sub {
+            font-size: 0.7rem;
+            color: var(--dourado);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            list-style: none;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #d0d8e8;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transicao);
+            position: relative;
+            padding: 0.3rem 0;
+            cursor: pointer;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--dourado);
+            transition: var(--transicao);
+        }
+
+        .nav-links a:hover {
+            color: var(--branco);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn-portfolio-header {
+            background: var(--dourado);
+            color: var(--azul-escuro) !important;
+            padding: 0.5rem 1.3rem !important;
+            border-radius: 25px;
+            font-weight: 700 !important;
+            letter-spacing: 0.5px;
+            transition: var(--transicao);
+            text-decoration: none;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .btn-portfolio-header:hover {
+            background: #e0bf5c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(201, 168, 76, 0.5);
+        }
+        .btn-portfolio-header::after {
+            display: none !important;
+        }
+
+        /* Hero / Carrossel */
+        .hero-carrossel {
+            position: relative;
+            width: 100%;
+            height: 75vh;
+            min-height: 500px;
+            max-height: 800px;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .carrossel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.9s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .slide.ativo {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                    rgba(10, 31, 63, 0.55) 0%,
+                    rgba(13, 47, 94, 0.4) 40%,
+                    rgba(10, 31, 63, 0.7) 100%);
+            z-index: 2;
+        }
+
+        .slide-conteudo {
+            position: absolute;
+            z-index: 3;
+            bottom: 18%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: var(--branco);
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .slide-conteudo h2 {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 2px 4px 25px rgba(0, 0, 0, 0.7);
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .carrossel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: var(--transicao);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .carrossel-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            border-color: white;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+        }
+        .carrossel-btn.prev {
+            left: 20px;
+        }
+        .carrossel-btn.next {
+            right: 20px;
+        }
+
+        .carrossel-indicadores {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            display: flex;
+            gap: 12px;
+        }
+        .indicador {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transicao);
+            border: 2px solid transparent;
+        }
+        .indicador.ativo {
+            background: var(--dourado);
+            border-color: white;
+            box-shadow: 0 0 12px rgba(201, 168, 76, 0.7);
+            transform: scale(1.3);
+        }
+
+        /* Seções gerais */
+        .secao {
+            position: relative;
+            z-index: 1;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .secao-titulo {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--azul-escuro);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+        .secao-subtitulo {
+            text-align: center;
+            color: var(--texto-medio);
+            margin-bottom: 3rem;
+            font-size: 1.05rem;
+        }
+        .linha-decorativa {
+            width: 60px;
+            height: 4px;
+            background: var(--dourado);
+            margin: 0.6rem auto 1.5rem;
+            border-radius: 2px;
+        }
+
+        /* Modal do Portfólio */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 31, 63, 0.9);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .modal-overlay.ativo {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-conteudo {
+            background: #0b0710; /* fundo escuro do portfólio */
+            border-radius: 24px;
+            width: 95%;
+            max-width: 1100px;
+            height: 90vh;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            border: 2px solid var(--dourado);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-fechar {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #eac56b;
+            z-index: 10;
+            line-height: 1;
+            transition: var(--transicao);
+        }
+        .modal-fechar:hover {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .modal-iframe {
+            flex: 1;
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Cursos */
+        .cursos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .curso-card {
+            background: var(--branco);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: var(--sombra);
+            transition: var(--transicao);
+            border-top: 5px solid var(--azul-claro);
+        }
+        .curso-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--sombra-forte);
+            border-top-color: var(--dourado);
+        }
+        .curso-card .icone-curso {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .curso-card h4 {
+            font-size: 1.4rem;
+            color: var(--azul-escuro);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        .curso-card p {
+            color: var(--texto-medio);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .curso-card .tag-curso {
+            display: inline-block;
+            background: var(--azul-suave);
+            color: var(--azul-principal);
+            padding: 0.25rem 0.9rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Localização */
+        .localizacao-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: stretch;
+        }
+        .mapa-placeholder {
+            flex: 1;
+            min-width: 280px;
+            min-height: 350px;
+            background: var(--azul-medio);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+            box-shadow: var(--sombra);
+            cursor: pointer;
+            transition: var(--transicao);
+            border: 3px solid transparent;
+        }
+        .mapa-placeholder:hover {
+            border-color: var(--dourado);
+        }
+        .mapa-placeholder .pin-mapa {
+            font-size: 4rem;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        .info-localizacao {
+            flex: 1;
+            min-width: 280px;
+            background: var(--branco);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--sombra);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .info-localizacao h4 {
+            color: var(--azul-escuro);
+            font-size: 1.3rem;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--texto-medio);
+        }
+        .info-item .emoji {
+            font-size: 1.4rem;
+        }
+
+        /* CTA */
+        .cta-portfolio {
+            text-align: center;
+            margin: 2rem 0 3rem;
+        }
+        .btn-portfolio-grande {
+            display: inline-block;
+            background: var(--dourado);
+            color: var(--azul-escuro);
+            padding: 1rem 2.8rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: var(--transicao);
+            box-shadow: 0 8px 30px rgba(201, 168, 76, 0.4);
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-portfolio-grande:hover {
+            background: #e0bf5c;
+            transform: translateY(-4px);
+            box-shadow: 0 14px 40px rgba(201, 168, 76, 0.6);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--azul-escuro);
+            color: #bcc7d9;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            border-top: 3px solid var(--dourado);
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+                justify-content: center;
+            }
+            .hero-carrossel {
+                height: 55vh;
+                min-height: 380px;
+            }
+            .secao {
+                padding: 2.5rem 1rem;
+            }
+            .carrossel-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 1.1rem;
+            }
+            .carrossel-btn.prev {
+                left: 8px;
+            }
+            .carrossel-btn.next {
+                right: 8px;
+            }
+            .slide-conteudo h2 {
+                font-size: 2.2rem;
+            }
+            .modal-conteudo {
+                height: 95vh;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Portfólio da Maria 🕷️</h1>
-    <p>Meus projetos com estilo Homem-Aranha</p>
-  </header>
 
-  <nav>
-    <a href="sobre.html">Sobre</a>
-    <a href="projetos.html">Projetos</a>
-  </nav>
-
-  <section id="projetos" class="projects">
-    <div class="project-card">
-      <h2>Café Encanto</h2>
-      <p>Os melhores cafés e diferenciados</p>
-      <a herf="https://maria-off.github.io/Cafeteria/index.html">Ver mais</a>
+    <!-- MARCA D'ÁGUA COM LOGO DO COLÉGIO -->
+    <div class="marca-dagua-fundo" aria-hidden="true">
+        <span class="logo-watermark">POLO</span>
     </div>
 
-     <div class="project-card">
-      <h2>Locadora VrumVrum</h2>
-      <p>A melhor locadora que você pode ter para cuidar e gerenciar seus automoveis</p>
-      <a herf="https://maria-off.github.io/Locadora/index.html">Ver mais</a>
-    </div>
-    <!-- Adicione mais projetos -->
-  </section>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-area">
+                <div class="logo-icone" title="Colégio Polo">P</div>
+                <div class="logo-texto">
+                    <span class="logo-nome">Colégio Polo</span>
+                    <span class="logo-sub">Unidade Polo</span>
+                </div>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#cursos">Cursos</a></li>
+                    <li><a href="#localizacao">Localização</a></li>
+                    <li><a class="btn-portfolio-header" onclick="abrirPortfolio()">📁 Meu Portfólio</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <footer>
-    <p>© 2025 Maria - Inspirado no universo Homem-Aranha</p>
-  </footer>
+    <!-- CARROSSEL -->
+    <section class="hero-carrossel" id="inicio">
+        <div class="carrossel-container">
+            <div class="slide ativo" style="background-image: url('1000191091.jpg');">
+                <div class="slide-overlay"></div>
+                <div class="slide-conteudo"><h2>Colégio Polo</h2></div>
+            </div>
+            <div class="slide" style="background-image: url('1000191092.jpg');">
+                <div class="slide-overlay"></div>
+                <div class="slide-conteudo"><h2>Colégio Polo</h2></div>
+            </div>
+        </div>
+        <button class="carrossel-btn prev" onclick="mudarSlide(-1)">&#10094;</button>
+        <button class="carrossel-btn next" onclick="mudarSlide(1)">&#10095;</button>
+        <div class="carrossel-indicadores" id="indicadores"></div>
+    </section>
+
+    <!-- CURSOS -->
+    <section class="secao" id="cursos">
+        <h2 class="secao-titulo">Cursos Oferecidos</h2>
+        <div class="linha-decorativa"></div>
+        <p class="secao-subtitulo">O Colégio Polo oferece formações técnicas de excelência</p>
+        <div class="cursos-grid">
+            <div class="curso-card">
+                <span class="icone-curso">💻</span>
+                <h4>Desenvolvimento de Sistemas</h4>
+                <p>Aprenda a criar softwares, aplicativos web e sistemas completos, com lógica de programação, bancos de dados e metodologias ágeis.</p>
+                <span class="tag-curso">Técnico Profissionalizante</span>
+            </div>
+            <div class="curso-card">
+                <span class="icone-curso">🤖</span>
+                <h4>Desenvolvimento de IA</h4>
+                <p>Mergulhe em machine learning, processamento de linguagem natural e visão computacional, formando-se para a era digital.</p>
+                <span class="tag-curso">Técnico Profissionalizante</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCALIZAÇÃO -->
+    <section class="secao" id="localizacao">
+        <h2 class="secao-titulo">Onde Estamos</h2>
+        <div class="linha-decorativa"></div>
+        <p class="secao-subtitulo">Venha nos visitar na Unidade Polo</p>
+        <div class="localizacao-container">
+            <div class="mapa-placeholder" onclick="window.open('https://www.google.com/maps?q=Colégio+Polo', '_blank')" title="Clique para abrir no Google Maps">
+                <span class="pin-mapa">📍</span>
+                <p><strong>Colégio Polo - Unidade Polo</strong></p>
+                <p style="opacity:0.7;">Clique para ver no Google Maps</p>
+            </div>
+            <div class="info-localizacao">
+                <h4>📍 Endereço</h4>
+                <div class="info-item"><span class="emoji">🏫</span><span>Colégio Polo - Unidade Polo<br><small>R.Pavão, 831</small></span></div>
+                <div class="info-item"><span class="emoji">📞</span><span>Telefone: (XX) XXXX-XXXX</span></div>
+                <div class="info-item"><span class="emoji">✉️</span><span>contato@colegiopolo.com.br</span></div>
+                <div class="info-item"><span class="emoji">🕐</span><span>Seg a Sex: 7h às 18h</span></div>
+                <p style="margin-top:1rem;font-size:0.85rem;color:#666;"><em>💡 Substitua os dados acima pelas informações reais da Unidade Polo.</em></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOTÃO PARA O PORTFÓLIO -->
+    <div class="cta-portfolio">
+        <button class="btn-portfolio-grande" onclick="abrirPortfolio()">📁 Acessar Meu Portfólio</button>
+        <p style="margin-top:0.8rem;color:var(--texto-medio);font-size:0.9rem;">Confira meus projetos e toda a minha trajetória em tecnologia</p>
+    </div>
+
+    <!-- MODAL DO PORTFÓLIO (COM IFRAME) -->
+    <div class="modal-overlay" id="modalPortfolio">
+        <div class="modal-conteudo">
+            <button class="modal-fechar" onclick="fecharPortfolio()">&times;</button>
+            <iframe class="modal-iframe" id="portfolioIframe" title="Portfólio Maria"></iframe>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p style="font-weight: 700; color: white; font-size: 1.2rem;">Colégio Polo</p>
+        <p style="color: var(--dourado); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;">Unidade Polo</p>
+        <p style="margin-top:0.6rem; font-size:0.85rem;">&copy; 2026 - Página desenvolvida por aluna do 3º ano | Desenvolvimento de Sistemas</p>
+        <a href="https://www.linkedin.com/in/maria-pereira-04387440b/" target="_blank">Linkedin</a>
+    </footer>
+
+    <script>
+        // ===== CARROSSEL =====
+        (function() {
+            const slides = document.querySelectorAll('.slide');
+            const indicadoresContainer = document.getElementById('indicadores');
+            let slideAtual = 0;
+            const totalSlides = slides.length;
+            let intervalo;
+
+            for (let i = 0; i < totalSlides; i++) {
+                const indicador = document.createElement('span');
+                indicador.classList.add('indicador');
+                if (i === 0) indicador.classList.add('ativo');
+                indicador.addEventListener('click', () => irParaSlide(i));
+                indicadoresContainer.appendChild(indicador);
+            }
+            const indicadores = document.querySelectorAll('.indicador');
+
+            function mostrarSlide(index) {
+                slides.forEach(s => s.classList.remove('ativo'));
+                indicadores.forEach(ind => ind.classList.remove('ativo'));
+                slides[index].classList.add('ativo');
+                indicadores[index].classList.add('ativo');
+                slideAtual = index;
+            }
+
+            function mudarSlide(direcao) {
+                let novo = slideAtual + direcao;
+                if (novo >= totalSlides) novo = 0;
+                if (novo < 0) novo = totalSlides - 1;
+                mostrarSlide(novo);
+                resetarIntervalo();
+            }
+
+            function irParaSlide(index) {
+                mostrarSlide(index);
+                resetarIntervalo();
+            }
+
+            function resetarIntervalo() {
+                clearInterval(intervalo);
+                intervalo = setInterval(() => {
+                    let novo = slideAtual + 1;
+                    if (novo >= totalSlides) novo = 0;
+                    mostrarSlide(novo);
+                }, 5000);
+            }
+
+            window.mudarSlide = mudarSlide;
+            window.irParaSlide = irParaSlide;
+
+            intervalo = setInterval(() => {
+                let novo = slideAtual + 1;
+                if (novo >= totalSlides) novo = 0;
+                mostrarSlide(novo);
+            }, 5000);
+
+            const carrosselContainer = document.querySelector('.hero-carrossel');
+            carrosselContainer.addEventListener('mouseenter', () => clearInterval(intervalo));
+            carrosselContainer.addEventListener('mouseleave', () => {
+                clearInterval(intervalo);
+                intervalo = setInterval(() => {
+                    let novo = slideAtual + 1;
+                    if (novo >= totalSlides) novo = 0;
+                    mostrarSlide(novo);
+                }, 5000);
+            });
+
+            let touchStartX = 0;
+            carrosselContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            carrosselContainer.addEventListener('touchend', (e) => {
+                const touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) mudarSlide(1);
+                    else mudarSlide(-1);
+                }
+            });
+        })();
+
+        // ===== MODAL DO PORTFÓLIO =====
+        const portfolioHTML = `<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Portfólio Maria - Enrolados ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0b0710;
+            color: #f5f0ff;
+            line-height: 1.5;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .lights-background {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0;
+        }
+        .light {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255,215,0,0.8), rgba(255,160,0,0.3));
+            border-radius: 50%;
+            box-shadow: 0 0 20px 4px rgba(255,215,0,0.6);
+            animation: floatLight 8s infinite alternate ease-in-out;
+            opacity: 0.6;
+        }
+        @keyframes floatLight {
+            0% { transform: translateY(0px) translateX(0px); opacity: 0.4; }
+            100% { transform: translateY(-100px) translateX(40px); opacity: 0.9; }
+        }
+        .container { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .hero { text-align: center; margin-bottom: 3rem; }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            background: linear-gradient(135deg, #F5E6B2, #E6C87A, #CFB56B);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .greeting { color: #eac56b; margin-top: 10px; font-weight: 600; }
+        .subjects-grid {
+            display: flex; flex-wrap: wrap; justify-content: center;
+            gap: 1rem; margin-bottom: 2.5rem;
+        }
+        .subject-card {
+            background: rgba(30, 25, 55, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(230, 200, 120, 0.3);
+            border-radius: 50px; padding: 0.7rem 1.5rem;
+            cursor: pointer; transition: 0.3s; color: #ffefcf;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .subject-card:hover, .subject-card.active {
+            background: linear-gradient(135deg, #4a2f6d, #2c1b46);
+            border-color: #ffdd99; transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(234, 197, 107, 0.2);
+        }
+        .content-section {
+            background: rgba(15, 12, 28, 0.8);
+            border-radius: 2rem; border: 1px solid rgba(218, 185, 90, 0.2);
+            padding: 2rem; min-height: 300px;
+        }
+        .aula-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 1.2rem; padding: 1.5rem; margin-bottom: 1.2rem;
+            border-left: 4px solid #eac56b; transition: 0.3s;
+        }
+        .aula-item:hover { background: rgba(255, 255, 255, 0.06); transform: translateX(5px); }
+        .links-container { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+        .btn-link {
+            background: #2a1b46; color: #ffefcf; padding: 8px 18px;
+            border-radius: 20px; text-decoration: none; font-size: 0.85rem;
+            border: 1px solid #eac56b; transition: 0.2s;
+        }
+        .btn-link:hover { background: #eac56b; color: #0b0710; }
+        .qr-display { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 15px; }
+        .qr-card { 
+            background: white; padding: 12px; border-radius: 12px; 
+            text-align: center; color: #333; width: 170px;
+        }
+        .qr-card img { width: 100%; border-radius: 4px; margin-bottom: 8px; }
+        .floating-signature {
+            position: fixed; bottom: 20px; left: 20px;
+            font-size: 0.75rem; color: #eac56b; background: rgba(0,0,0,0.5);
+            padding: 8px 15px; border-radius: 20px; z-index: 100;
+        }
+    </style>
+</head>
+<body>
+<div class="lights-background" id="lightsContainer"></div>
+<div class="floating-signature">🕯️ "Enrolada nos códigos, mas sempre brilhando" ✨</div>
+<div class="container">
+    <div class="hero">
+        <div style="font-size: 2rem; margin-bottom: 10px;">🏮✨</div>
+        <h1>Portfólio Maria</h1>
+        <div class="greeting">Bem-vinda de volta ao seu reino digital!</div>
+    </div>
+    <div class="subjects-grid" id="subjectsGrid"></div>
+    <div class="content-section">
+        <div id="dynamicTitle"></div>
+        <div id="aulasContainer"></div>
+    </div>
+</div>
+<script>
+    const aulasData = {
+        "analise": {
+            nomeExibicao: "Análise 📊", icone: "fas fa-chart-line",
+            aulas: [
+                { nome: "📄 Agenda Escolar Digital", descricao: "Planejamento e organização escolar no Gamma.", links: [{ nome: "📖 Acessar Gamma", url: "https://gamma.app/docs/Agenda-Escolar-Digital-eecx4lgl6d43c8i?mode=doc" }] },
+                { nome: "🏛️ Propriedade Intelectual", descricao: "Protegendo a Inovação e Criatividade.", links: [{ nome: "📖 Ver Documento", url: "https://gamma.app/docs/O-Universo-da-Propriedade-Intelectual-81yhzqzlh6ygpji?mode=doc" }] },
+                { nome: "🚀 Ecossistema de Startups 2026", descricao: "A Nova Era dos Unicórnios Latino-Americanos.", links: [{ nome: "📖 Ver Documento", url: "https://gamma.app/docs/Ecossistema-de-Startups-2026-A-Nova-Era-dos-Unicornios-Latino-Ame-rrlvid92y60z8at" }] },
+                { nome: "🧠 Insights de IA - NotebookLM", descricao: "Análise inteligente e curadoria de documentos via NotebookLM.", links: [
+                    { nome: "🔗 as melhores IA's de 2026", url: "https://notebooklm.google.com/notebook/0017e66c-14a8-4019-a5fc-5c936d4555d1/artifact/11b632a0-3206-40b8-8b73-e81189ab924b?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_2&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_2_" },
+                    { nome: "🔗 SUA ANALISE SOBRE TRABALHO DOS ALUNOS 1 ANO", url: "https://notebooklm.google.com/notebook/0017e66c-14a8-4019-a5fc-5c936d4555d1/artifact/11b632a0-3206-40b8-8b73-e81189ab924b?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_2&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_2_" }
+                ] }
+            ]
+        },
+        "javascript": {
+            nomeExibicao: "JavaScript 💛", icone: "fab fa-js",
+            aulas: [
+                { nome: "📦 Variáveis em JS", descricao: "Estudo sobre tipos de dados e declarações.", links: [{ nome: "🐙 Repositório", url: "https://github.com/maria-off/variaveis" }] },
+                { nome: "🔄 Estrutura For", descricao: "Dominando laços de repetição.", links: [{ nome: "🐙 Repositório", url: "https://github.com/maria-off/Usando-For" }] },
+                { nome: "⏸️ Break e Continue", descricao: "Controle de fluxo em loops.", links: [{ nome: "🐙 Repositório", url: "https://github.com/maria-off/breake-continue" }] },
+                { nome: "🔍 Método Filtra", descricao: "Filtragem de arrays em JavaScript.", links: [{ nome: "🐙 Repositório", url: "https://github.com/maria-off/filtra" }] }
+            ]
+        },
+        "algoritmos": {
+            nomeExibicao: "Algoritmos ⚙️", icone: "fas fa-code-branch",
+            aulas: [
+                { nome: "🔄 Selection Sort", descricao: "Lógica de ordenação passo a passo.", links: [{ nome: "🐙 Repositório", url: "https://github.com/maria-off/SelectionSort" }] },
+                { nome: "📊 Ordenados", descricao: "Estudos de algoritmos de organização.", links: [{ nome: "🐙 Repositório", url: "https://github.com/maria-off/ordenados" }] }
+            ]
+        },
+        "html-projetos": {
+            nomeExibicao: "Projetos Web 🌐", icone: "fab fa-html5",
+            aulas: [
+                { nome: "🧪 Teste GitHub Pages", descricao: "Primeiro deploy realizado com sucesso.", links: [{ nome: "🌍 Ver Site", url: "https://maria-off.github.io/teste/teste.html" }] },
+                { nome: "📅 Terceirão 2026", descricao: "Projeto dedicado à turma de 2026.", links: [{ nome: "🌍 Ver Site", url: "https://maria-off.github.io/Terceir-o-2026/teste.html" }] }
+            ]
+        },
+        "mobile": {
+            nomeExibicao: "Mobile 📱", icone: "fas fa-mobile-alt",
+            aulas: [
+                { nome: "📲 QR Codes de Acesso", descricao: "Escaneie para abrir no celular.", isQR: true, qrs: [
+                    { label: "Projeto 01", img: "1.png" },
+                    { label: "Projeto 02", img: "2.png" }
+                ]}
+            ]
+        },
+        "games": {
+            nomeExibicao: "Games 🎮", icone: "fas fa-gamepad",
+            aulas: [
+                { nome: "🕹️ PAC-MAN Retro", descricao: "Desenvolvimento do clássico arcade.", links: [{ nome: "🎮 Jogar Agora", url: "https://maria-off.github.io/PAC-MAN/index.html" }] }
+            ]
+        }
+    };
+
+    function renderSubject(key) {
+        const data = aulasData[key];
+        const container = document.getElementById('aulasContainer');
+        const titleDiv = document.getElementById('dynamicTitle');
+        titleDiv.innerHTML = '<h2 style="margin-bottom: 20px;"><i class="'+data.icone+'"></i> '+data.nomeExibicao+'</h2>';
+        let html = '';
+        data.aulas.forEach(aula => {
+            html += '<div class="aula-item"><h3>'+aula.nome+'</h3><p style="color: #b9ad8f; font-size: 0.9rem; margin: 5px 0;">'+aula.descricao+'</p>';
+            if(aula.isQR) {
+                html += '<div class="qr-display">';
+                aula.qrs.forEach(qr => { html += '<div class="qr-card"><img src="'+qr.img+'" alt="QR"><p style="font-weight:bold; font-size:0.8rem;">'+qr.label+'</p></div>'; });
+                html += '</div>';
+            } else {
+                html += '<div class="links-container">';
+                aula.links.forEach(l => { html += '<a href="'+l.url+'" target="_blank" class="btn-link"><i class="fas fa-external-link-alt"></i> '+l.nome+'</a>'; });
+                html += '</div>';
+            }
+            html += '</div>';
+        });
+        container.innerHTML = html;
+        document.querySelectorAll('.subject-card').forEach(c => c.classList.remove('active'));
+        document.querySelector('[data-subject="'+key+'"]').classList.add('active');
+    }
+
+    const grid = document.getElementById('subjectsGrid');
+    Object.keys(aulasData).forEach(key => {
+        const btn = document.createElement('div');
+        btn.className = 'subject-card';
+        btn.setAttribute('data-subject', key);
+        btn.innerHTML = '<i class="'+aulasData[key].icone+'"></i> '+aulasData[key].nomeExibicao;
+        btn.onclick = () => renderSubject(key);
+        grid.appendChild(btn);
+    });
+
+    for (let i = 0; i < 40; i++) {
+        const light = document.createElement('div');
+        light.className = 'light';
+        light.style.left = Math.random() * 100 + '%';
+        light.style.top = Math.random() * 100 + '%';
+        const size = Math.random() * 10 + 5 + 'px';
+        light.style.width = size; light.style.height = size;
+        light.style.animationDelay = Math.random() * 5 + 's';
+        light.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        document.getElementById('lightsContainer').appendChild(light);
+    }
+
+    renderSubject('analise');
+<\/script>
+</body>
+</html>`;
+
+        function abrirPortfolio() {
+            const iframe = document.getElementById('portfolioIframe');
+            iframe.srcdoc = portfolioHTML;
+            document.getElementById('modalPortfolio').classList.add('ativo');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function fecharPortfolio() {
+            document.getElementById('modalPortfolio').classList.remove('ativo');
+            document.body.style.overflow = '';
+            // Opcional: limpar iframe para evitar consumo de memória
+            // document.getElementById('portfolioIframe').srcdoc = '';
+        }
+
+        document.getElementById('modalPortfolio').addEventListener('click', function(e) {
+            if (e.target === this) fecharPortfolio();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') fecharPortfolio();
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-
