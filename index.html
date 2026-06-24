@@ -953,6 +953,12 @@
             aulas: [
                 { nome: "🕹️ PAC-MAN Retro", descricao: "Desenvolvimento do clássico arcade.", links: [{ nome: "🎮 Jogar Agora", url: "https://maria-off.github.io/PAC-MAN/index.html" }] }
             ]
+        },
+        "google-ai": {
+            nomeExibicao: "Google AI Studio 🤖", icone: "fas fa-robot",
+            aulas: [
+                { nome: "💰 Finanças", descricao: "Aplicação que ajuda a organizar suas finanças de forma inteligente.", links: [{ nome: "💸 Acessar App", url: "https://easiy-finance-494374422137.us-west1.run.app" }] }
+            ]
         }
     };
 
@@ -1017,8 +1023,6 @@
         function fecharPortfolio() {
             document.getElementById('modalPortfolio').classList.remove('ativo');
             document.body.style.overflow = '';
-            // Opcional: limpar iframe para evitar consumo de memória
-            // document.getElementById('portfolioIframe').srcdoc = '';
         }
 
         document.getElementById('modalPortfolio').addEventListener('click', function(e) {
